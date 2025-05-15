@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Shop@Tife</title>
+  <link rel="stylesheet" href="style7.css" />
+  <body>
+
+  <header>
+    <div class="logo">Shop@Tife</div>
+    <nav>
+      <a href="Shop@Tife3.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+  <main class="about-page">
+
+    <section class="hero about-hero">
+      <h1>About Shop@Tife</h1>
+      <p>Unlock your inner Glow.</p>
+    </section>
+
+    <section class="about-story">
+      <h2>Our Story</h2>
+      <p>Shop@Tife was founded with a passion for empowering individuals through stylish, affordable fashion. It started as a small retail business and now we gone to greater heights.</p>
+      <p>This could not be achieved without the help and support of my Siblings, Friends and most especially my mum. 
+    </section>
+
+    <section class="mission-vision">
+      <div class="mission">
+        <h3>Our Mission</h3>
+        <p>To inspire confidence through stylish, quality fashionable accessories and many more.</p>
+      </div>
+      <div class="vision">
+        <h3>Our Vision</h3>
+        <p>To become the go-to fashion destination for trendsetters and everyday shoppers alike. And to increse the capacity of the company to take orders of our beloved customers simultaneously without confusion.</p>
+      </div>
+    </section>
+
+    <section class="team">
+      <h2>Meet the Team</h2>
+      <div class="team-members">
+        <div class="member">
+          <img src="images/founder.jpg" alt="Founder">
+          <h4>A. Boluwatife</h4>
+          <p>Founder & Creative Director</p>
+        </div>
+        <div class="member">
+          <img src="images/lead-designer.jpg" alt="Designer">
+          <h4>A. Temileyi</h4>
+          <p>Web Designer</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial">
+        <p>"The styles are always fresh, and I love how fast my order arrives!"</p>
+        <h4>- Ife O.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Great quality and beautiful packaging — my favorite fashion store."</p>
+        <h4>- Aisha K.</h4>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <h2>Join Our Newsletter</h2>
+      <p>Get the latest drops and exclusive offers directly to your inbox.</p>
+      <form id="newsletter-form">
+       <form action="https://formsubmit.co/shopattife@gmail.com" method="POST">
+  <input type="email" name="email" placeholder="Enter your email" required>
+  <button type="submit">Subscribe</button>
+</form>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Shop@Tife. All rights reserved.</p>
+  </footer>
+
+  <button id="scrollTopBtn" title="Go to top">↑</button>
+
+  <script>
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.onscroll = () => {
+      scrollTopBtn.style.display = window.scrollY > 200 ? "block" : "none";
+    };
+    scrollTopBtn.onclick = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Newsletter form alert
+    document.getElementById("newsletter-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thanks for subscribing!");
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

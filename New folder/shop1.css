@@ -1,0 +1,103 @@
+.shop-section {
+  padding: 50px 20px;
+  background: #ff7171;
+  text-align: center;
+}
+.section-heading {
+padding: 50px 10%;
+text-align: center;
+background-color: #ff7171;
+}
+
+
+.shop-filters {
+  margin: 20px 0;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-btn.active {
+  background: #893b3b;
+  color: #fff;
+}
+
+/* Responsive Grid */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-center, .nav-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 0;
+  }
+
+  .nav-login-btn {
+    margin-top: 10px;
+  }
+
+  .shop-filters {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    margin: 5px;
+  }
+}
+
+/* Responsive Footer */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-nav ul {
+    justify-content: center;
+  }
+}
+
+
+.shop-card {
+  background: #893b3b;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.471);
+  transition: transform 0.3s ease;
+}
+
+
+.shop-card:hover {
+  transform: scale(1.02);
+}
+
+
+.buy-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}

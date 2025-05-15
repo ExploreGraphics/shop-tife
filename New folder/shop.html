@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop - Shop@Tife</title>
+  <link rel="stylesheet" href="stylehtml.css" />
+  <link rel="stylesheet" href="shop1.css" />
+  <link rel="icon" href="../Images/icon.png" type="icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="cart.js" defer></script>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <div class="nav-brand">Shop@Tife</div>
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-center">
+        <a href="Shop@Tife3.html" class="nav-link">HOME</a>
+        <a href="shop.html" class="nav-link present">SHOP</a>
+        <a href="About.html" class="nav-link">ABOUT US</a>
+        <a href="contact.html" class="nav-link">CONTACT</a>
+        <a href="cart.html" class="nav-cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span id="cart-count">0</span>
+        </a>
+        <a href="login.html"><button class="nav-login-btn">LOGIN</button></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- SHOP SECTION -->
+<section class="shop-section">
+  <h2 class="section-heading">Shop All Products</h2>
+
+  <div class="shop-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="men">Men</button>
+    <button class="filter-btn" data-filter="women">Women</button>
+    <button class="filter-btn" data-filter="accessories">Accessories</button>
+  </div>
+
+  <div class="shop-grid">
+    <div class="shop-card" data-category="men" data-id="1" data-name="Men's Blazer" data-price="89.99" data-image="../Images/img-19.jpg">
+      <img src="../Images/img-19.jpg" alt="Men's Wear" />
+      <h3>Men's Blazer</h3>
+      <p>$89.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    
+    <div class="shop-card" data-category="women" data-id="2" data-name="Women's Dress" data-price="129.99" data-image="../Images/img-7.png">
+      <img src="../Images/img-7.png" alt="Women's Casual" />
+      <h3>Women's Dress</h3>
+      <p>$129.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="shop-card" data-category="accessories" data-id="3" data-name="Gold Necklace" data-price="190.99" data-image="../Images/img-29.jpg">
+      <img src="../Images/img-29.jpg" alt="Necklace" />
+      <h3>Gold Necklace</h3>
+      <p>$190.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="shop-card" data-category="men" data-id="4" data-name="Summer Top" data-price="39.99" data-image="../Images/img-22.jpg">
+      <img src="../Images/img-22.jpg" alt="Summer Top" />
+      <h3>Summer Top</h3>
+      <p>$39.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="shop-card" data-category="women" data-id="5" data-name="Women's Trousers" data-price="149.99" data-image="../Images/img-25.jpg">
+      <img src="../Images/img-25.jpg" alt="Trousers" />
+      <h3>Women's Trousers</h3>
+      <p>$149.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="shop-card" data-category="accessories" data-id="6" data-name="Diamond Watch" data-price="5900.99" data-image="../Images/img-31.jpg">
+      <img src="../Images/img-31.jpg" alt="Wristwatch" />
+      <h3>Diamond Watch</h3>
+      <p>$5900.99</p>
+      <button class="buy-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>Shop@Tife</h2>
+    </div>
+    <div class="footer-nav">
+      <h3><a href="tel:09034563593">Call: 09034563593</a></h3>
+      <ul>
+   <li>
+  <a href="https://instagram.com/t_ifehhh" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+</li>
+  <a href="https://www.tiktok.com/@tifeeeeee4" target="_blank">
+    <i class="fab fa-tiktok"></i>
+  </a>
+</li>
+</ul>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript for filtering and cart -->
+<script>
+  // Filtering
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const shopCards = document.querySelectorAll(".shop-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".filter-btn.active").classList.remove("active");
+      btn.classList.add("active");
+
+      const filter = btn.getAttribute("data-filter");
+      shopCards.forEach((card) => {
+        card.style.display = (filter === "all" || card.getAttribute("data-category") === filter) ? "block" : "none";
+      });
+    });
+  });
+
+  // Cart System
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    document.getElementById('cart-count').textContent = cart.length;
+  }
+
+  function addToCart(button) {
+    const card = button.closest('.shop-card');
+    const product = {
+      id: card.getAttribute('data-id'),
+      name: card.getAttribute('data-name'),
+      price: card.getAttribute('data-price'),
+      image: card.getAttribute('data-image'),
+      quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(`${product.name} added to cart.`);
+  }
+
+  // Initialize cart count on load
+  updateCartCount();
+</script>
+
+</body>
+</html>

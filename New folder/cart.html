@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - Shop@Tife</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffebeb;
+    }
+
+    header, footer {
+      background-color: #fff9f9;
+      color: #893b3b;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #893b3b;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #893b3b;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .item-details {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .item-name {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .remove-btn {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .remove-btn:hover {
+      background-color: #c9302c;
+    }
+
+    .cart-total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .clear-btn,
+    .checkout-btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .clear-btn {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .checkout-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .checkout-btn:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .item-details {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cart-total, .actions {
+        text-align: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    .back-to-shop-btn {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #893b3b;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.back-to-shop-btn:hover {
+  background-color: #000000;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Shop@Tife</h1>
+  <nav>
+    <a href="Shop@Tife3.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="About.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+
+  <div class="cart-total">
+    Total: &#8358;<span id="total-price">0.00</span>
+  </div>
+
+  <div class="actions">
+    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+</main>
+<a href="shop.html" class="back-to-shop-btn">← Back to Shop</a>
+<footer>
+  <p>&copy; 2025 Shop@Tife. All rights reserved.</p>
+</footer>
+
+<script>
+  const cartItemsContainer = document.getElementById("cart-items");
+  const cartCount = document.getElementById("cart-count");
+  const totalPriceEl = document.getElementById("total-price");
+function loadCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartItemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const quantity = item.quantity || 1;
+    const itemEl = document.createElement("div");
+    itemEl.className = "cart-item";
+    itemEl.innerHTML = `
+      <div class="item-details">
+        <img src="${item.image}" alt="${item.name}" />
+        <div>
+          <div class="item-name">${item.name} <small>(x${quantity})</small></div>
+          <div>$${item.price}</div>
+        </div>
+      </div>
+      <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+    `;
+    cartItemsContainer.appendChild(itemEl);
+    total += parseFloat(item.price) * quantity;
+  });
+
+  totalPriceEl.textContent = total.toFixed(2);
+  cartCount.textContent = cart.length;
+}
+
+
+  function removeItem(index) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    loadCart();
+  }
+
+  function checkout() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+    } else {
+      alert("Proceeding to checkout...");
+      localStorage.removeItem("cart");
+      loadCart();
+    }
+  }
+
+  // Initialize on load
+  loadCart();
+</script>
+
+</body>
+</html>
